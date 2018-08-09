@@ -4,6 +4,10 @@ Hello! These are my personal dotfiles. They're full of both functional and aesth
 choices that I personally prefer to work with. These include colorschemes, plugins, and
 other additions.
 
+## The Finished Product
+
+![What it's supposed to look like](./sample.png)
+
 ## bashrc
 
 My `.bashrc` is a fork of a friend/colleagues, that has been modified over time to include
@@ -59,6 +63,12 @@ or turn it off for the regular PS1 prompt
 * Install [powerline](https://github.com/powerline/powerline)
 * Copy the powerline config files from the powerline git folder to `~/.config/powerline`
 * Copy my config files in as well, overwrite any existing files
+
+## Known Issues
+
+Not everything is themed properly yet. Vim's powerline colorscheme, for example, doesn't
+have a proper theme for git-related toolbar icons, and they currently look very ugly. This
+will be my next task, likely.
 
 ## Disclaimer
 

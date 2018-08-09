@@ -190,7 +190,7 @@ autocmd Syntax * RainbowParenthesesLoadRound
 autocmd Syntax * RainbowParenthesesLoadSquare
 autocmd Syntax * RainbowParenthesesLoadBraces
 
-set rtp+=$HOME/Documents/powerline/powerline/bindings/vim/
+set rtp+=$HOME/PATH/TO/DIRECTORY/powerline/powerline/bindings/vim/
 
 "if filereadable(expand("~/.vimrc_background"))
 "  let base16colorspace=256

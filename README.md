@@ -59,7 +59,7 @@ Want to use these?
 
 * Copy `.bashrc` to your home directory. Make sure to specify the powerline directory,
 or turn it off for the regular PS1 prompt
-* Copy `.vimrc` and `.tmux.conf` too
+* Copy `.vimrc` and `.tmux.conf` too, and do the same for those files as above
 * Install [powerline](https://github.com/powerline/powerline)
 * Copy the powerline config files from the powerline git folder to `~/.config/powerline`
 * Copy my config files in as well, overwrite any existing files

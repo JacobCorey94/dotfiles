@@ -92,6 +92,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias bypass='~/Sync/Desktop/Unix/nic.sh'
+alias tmux='TERM=xterm-256color tmux'
+
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -118,18 +120,20 @@ if ! shopt -oq posix; then
 fi
 
 # If it's not already running, start tmux
-if command -v tmux>/dev/null; then
-	[[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
-fi
+#if command -v tmux>/dev/null; then
+#	[[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+#fi
 
 # Standard custom PS1. Used if powerline is unavailable
-export PS1="\[$(tput bold)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]\[\033[38;5;231m\]:\[$(tput sgr0)\]\[\033[38;5;12m\]\W\[$(tput sgr0)\]\[\033[38;5;231m\]\\$\[$(tput sgr0)\]"
+export PS1="\[\033[38;5;12m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;5m\]@\[$(tput sgr0)\]\[\033[38;5;2m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;11m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\[$(tput sgr0)\]\[\033[38;5;1m\]>\[$(tput sgr0)\]"
 
-# Loads the powerline PS1 as a daemon for quick reloading
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. /path/to/powerline/directory/powerline/powerline/bindings/bash/powerline.sh
+# Loads the powerline PS1 as a daemon for quick reloading, but ONLY in tmux
+if [ $TMUX ]; then
+	powerline-daemon -q
+	POWERLINE_BASH_CONTINUATION=1
+	POWERLINE_BASH_SELECT=1
+	. ~/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+fi
 
 # Want to use the base-16 shell? Use this powerline instead, if installed
 #function _update_ps1() {
@@ -148,3 +152,4 @@ fi
 # Want base-16 shell? Enable this
 #BASE16_SHELL=$HOME/.config/base16-shell/
 #[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+

@@ -190,7 +190,7 @@ autocmd Syntax * RainbowParenthesesLoadRound
 autocmd Syntax * RainbowParenthesesLoadSquare
 autocmd Syntax * RainbowParenthesesLoadBraces
 
-set rtp+=$HOME/PATH/TO/DIRECTORY/powerline/powerline/bindings/vim/
+set rtp+=$HOME/.local/lib/python3.6/site-packages/powerline/bindings/vim/
 
 "if filereadable(expand("~/.vimrc_background"))
 "  let base16colorspace=256
@@ -201,7 +201,7 @@ set rtp+=$HOME/PATH/TO/DIRECTORY/powerline/powerline/bindings/vim/
 set laststatus=2
 
 " Hide the mode in the command bar
-set noshowmode
+" set noshowmode
 
 " Deprecated Options
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)

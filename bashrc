@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+### Kemo's Stuff That I Still Use To This Day ###
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -35,50 +37,12 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -91,7 +55,6 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias bypass='~/Sync/Desktop/Unix/nic.sh'
 alias tmux='TERM=xterm-256color tmux'
 
 
@@ -119,37 +82,34 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# If it's not already running, start tmux
-#if command -v tmux>/dev/null; then
-#	[[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
-#fi
+### My Custom PS1 Script (Modify Here) ###
 
 # Standard custom PS1. Used if powerline is unavailable
 export PS1="\[\033[38;5;12m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;6m\]\u\[$(tput sgr0)\]\[\033[38;5;5m\]@\[$(tput sgr0)\]\[\033[38;5;2m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;11m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\n\[$(tput sgr0)\]\[\033[38;5;1m\]>\[$(tput sgr0)\]"
 
-# Loads the powerline PS1 as a daemon for quick reloading, but ONLY in tmux
-if [ $TMUX ]; then
-	powerline-daemon -q
-	POWERLINE_BASH_CONTINUATION=1
-	POWERLINE_BASH_SELECT=1
-	. ~/.local/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+### TMUX ###
+
+# If it's not already running, start tmux
+if command -v tmux>/dev/null; then
+	[[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 fi
 
-# Want to use the base-16 shell? Use this powerline instead, if installed
-#function _update_ps1() {
-#	PS1=$(powerline-shell $?)
-#}
+### Powerline ###
 
-#if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-#	PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-#fi
+# Loads the powerline PS1 as a daemon for quick reloading, but ONLY in tmux
+# if [ $TMUX ]; then
+# 	powerline-daemon -q
+# 	POWERLINE_BASH_CONTINUATION=1
+# 	POWERLINE_BASH_SELECT=1
+# 	. ~/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
+# fi
 
-# Enable if using tilix
+# powerline-daemon -q
+# POWERLINE_BASH_CONTINUATION=1
+# POWERLINE_BASH_SELECT=1
+# . ~/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
+
+### Tilix Stuff (Keep it on) ###
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
-
-# Want base-16 shell? Enable this
-#BASE16_SHELL=$HOME/.config/base16-shell/
-#[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-

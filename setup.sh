@@ -34,6 +34,7 @@ esac
 
 # Install misc.
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+curl -sS https://starship.rs/install.sh | sh
 
 # Copy powerline files over
 pythonVersion=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
@@ -55,7 +56,8 @@ echo -e "#\\t. ${powerlineDirectory}/bindings/bash/powerline.sh\n# fi\n" >> .bas
 echo -e "# Alternatively, if you always want powerline, uncomment this instead:\n# powerline-daemon -q" >> .bashrc
 echo -e "#POWERLINE_BASH_CONTINUATION=1\n#POWERLINE_BASH_SELECT=1\n#. ${powerlineDirectory}/bindings/bash/powerline.sh" >> .bashrc
 echo -e "export PATH=\"\$HOME/.local/share:\$PATH\"" >> .bashrc
-echo -e "\n# Zoxide\neval \"\$(zoxide init bash)\"\n" >> .bashrc
+echo -e "\n# Zoxide\neval \"\$(zoxide init bash)\"" >> .bashrc
+echo -e "\n# Starship Prompt\neval \"\$(starship init bash)\"" >> .bashrc
 
 # Install vimplug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

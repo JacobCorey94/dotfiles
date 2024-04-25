@@ -94,22 +94,7 @@ if command -v tmux>/dev/null; then
 	[[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 fi
 
-### Powerline ###
 
-# Loads the powerline PS1 as a daemon for quick reloading, but ONLY in tmux
-# if [ $TMUX ]; then
-# 	powerline-daemon -q
-# 	POWERLINE_BASH_CONTINUATION=1
-# 	POWERLINE_BASH_SELECT=1
-# 	. ~/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
-# fi
-
-# powerline-daemon -q
-# POWERLINE_BASH_CONTINUATION=1
-# POWERLINE_BASH_SELECT=1
-# . ~/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh
-
-### Tilix Stuff (Keep it on) ###
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi

@@ -69,8 +69,6 @@ noremap <c-k> :execute "tab h " . expand("<cword>")<cr>
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'altercation/vim-colors-solarized'
-
 Plug 'bronson/vim-trailing-whitespace'
 
 Plug 'tpope/vim-surround'
@@ -109,9 +107,6 @@ Plug 'kshenoy/vim-signature'
 
 " Adds a bar that lists tagged information; requires ctags to be in $PATH
 Plug 'majutsushi/tagbar'
-
-" base-16 colors
-" Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -185,29 +180,6 @@ highlight NonText ctermbg=none
 autocmd VimEnter * source ~/.vimrc
 autocmd VimEnter * RainbowParenthesesActivate
 autocmd VimEnter * RainbowParenthesesLoadRound
-" autocmd Syntax * RainbowParenthesesToggle
 autocmd Syntax * RainbowParenthesesLoadRound
 autocmd Syntax * RainbowParenthesesLoadSquare
 autocmd Syntax * RainbowParenthesesLoadBraces
-
-set rtp+=$HOME/.local/lib/python3.6/site-packages/powerline/bindings/vim/
-
-"if filereadable(expand("~/.vimrc_background"))
-"  let base16colorspace=256
-"  source ~/.vimrc_background
-"endif
-
-" Always show statusline
-set laststatus=2
-
-" Hide the mode in the command bar
-" set noshowmode
-
-" Deprecated Options
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-" set t_Co=256
-" set encoding=utf-8
-" set termencoding=utf-8
-" set term=xterm-256color
-" set termguicolors
-" let base16colorspace=256

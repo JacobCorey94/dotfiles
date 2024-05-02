@@ -20,7 +20,7 @@ else
 fi
 
 case $OS in
-	Ubuntu)
+	Ubuntu | "Kali GNU/Linux")
 		sudo apt update && sudo apt install vim tmux python3 python3-pip socat -y
 		pip install psutil
 		pip install powerline-status

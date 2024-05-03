@@ -27,17 +27,6 @@ case $OS in
 		pip install -U hyfetch
 		sudo apt install powerline zoxide zsh -y
 		python="python3"
-		pythonVersion=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
-		powerlineDirectory="${HOME}/.local/lib/python${pythonVersion}/site-packages/powerline"
-		;;
-	"Debian GNU/Linux")
-		sudo apt update && sudo apt install vim tmux curl python3 python3-pip socat -y
-		pip install psutil --break-system-packages
-		pip install powerline-status --break-system-packages
-		pip install -U hyfetch --break-system-packages
-		sudo apt install powerline zoxide zsh -y
-		python="python3"
-		powerlineDirectory="/usr/lib/python3/dist-packages/powerline"
 		;;
 	*)
 		echo "Error: OS not recognized"
@@ -49,6 +38,8 @@ curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | 
 curl -sS https://starship.rs/install.sh | sh
 
 # Copy powerline files over
+pythonVersion=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+powerlineDirectory="${HOME}/.local/lib/python${pythonVersion}/site-packages/powerline"
 cp -r powerline/* ${powerlineDirectory}/config_files
 
 # Move dotfiles

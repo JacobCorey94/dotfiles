@@ -24,7 +24,8 @@ case $OS in
 		sudo apt update && sudo apt install vim tmux python3 python3-pip socat -y
 		pip install psutil
 		pip install powerline-status
-		sudo apt install powerline zoxide -y
+		pip install -U hyfetch
+		sudo apt install powerline zoxide zsh -y
 		python="python3"
 		;;
 	*)
@@ -45,6 +46,7 @@ cp -r powerline/* ${powerlineDirectory}/config_files
 cp -v bashrc ~/.bashrc
 cp -v tmux.conf ~/.tmux.conf
 cp -v vimrc ~/.vimrc
+cp -v zshrc ~/.zshrc
 
 cd $HOME
 
@@ -74,3 +76,7 @@ vim +'PlugInstall --sync' +qa
 echo -e "\n\n# Standard powerline plugin\nsource \"$powerlineDirectory/bindings/tmux/powerline.conf\"\n" >> .tmux.conf
 echo -e "set -g default-terminal \"tmux-256color\"\nset -g terminal-overrides ',xterm-256color:Tc'" >> .tmux.conf
 echo -e "\n# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)\n# run '~/.tmux/plugins/tpm/tpm'" >> .tmux.conf
+
+# Set ZSH to default shell
+echo "Changing default shell to zsh:"
+chsh -s $(which zsh)

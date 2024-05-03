@@ -20,11 +20,19 @@ else
 fi
 
 case $OS in
-	Ubuntu | "Kali GNU/Linux" | "Debian GNU/Linux")
+	Ubuntu | "Kali GNU/Linux")
 		sudo apt update && sudo apt install vim tmux python3 python3-pip socat -y
 		pip install psutil
 		pip install powerline-status
 		pip install -U hyfetch
+		sudo apt install powerline zoxide zsh -y
+		python="python3"
+		;;
+	"Debian GNU/Linux")
+		sudo apt update && sudo apt install vim tmux curl python3 python3-pip socat -y
+		pip install psutil --break-system-packages
+		pip install powerline-status --break-system-packages
+		pip install -U hyfetch --break-system-packages
 		sudo apt install powerline zoxide zsh -y
 		python="python3"
 		;;

@@ -41,6 +41,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias tmux='TERM=xterm-256color tmux'
+alias ssh='ssh -X'
 
 ### Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -67,6 +68,10 @@ fi
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
+
+# PATH stuff
+export PATH="$HOME/.local/share:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Zoxide
 eval "$(zoxide init zsh)"

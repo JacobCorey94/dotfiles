@@ -27,6 +27,23 @@ case $OS in
 		pip install -U hyfetch
 		sudo apt install powerline zoxide zsh -y
 		python="python3"
+		# Copy powerline files over
+		pythonVersion=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+		powerlineDirectory="${HOME}/.local/lib/python${pythonVersion}/site-packages/powerline"	
+		cp -r powerline/* ${powerlineDirectory}/config_files
+		;;
+	"Arch Linux")
+		sudo pacman -Syu && sudo pacman -S vim tmux python python-pip socat --noconfirm
+		sudo pacman -S python-psutil --noconfirm
+		sudo pacman -S powerline powerline-fonts --noconfirm
+		sudo pacman -S hyfetch fastfetch --noconfirm
+		sudo pacman -S zoxide zsh --noconfirm
+		sudo pacman -S which --noconfirm
+		export PATH=$PATH:/home/rallo/.local/bin
+		# Copy powerline files over
+		pythonVersion=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+		powerlineDirectory="/usr/lib/python${pythonVersion}/site-packages/powerline"
+		sudo cp -r powerline/* ${powerlineDirectory}/config_files
 		;;
 	*)
 		echo "Error: OS not recognized"
@@ -36,11 +53,6 @@ esac
 # Install misc.
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 curl -sS https://starship.rs/install.sh | sh
-
-# Copy powerline files over
-pythonVersion=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
-powerlineDirectory="${HOME}/.local/lib/python${pythonVersion}/site-packages/powerline"
-cp -r powerline/* ${powerlineDirectory}/config_files
 
 # Move dotfiles
 cp -v bashrc ~/.bashrc
@@ -79,4 +91,18 @@ echo -e "\n# Initialize TMUX plugin manager (keep this line at the very bottom o
 
 # Set ZSH to default shell
 echo "Changing default shell to zsh:"
-chsh -s $(which zsh)
+case $OS in
+	Ubuntu | "Kali GNU/Linux")
+		chsh -s $(which zsh)
+		;;
+	"Arch Linux")
+		chsh -s $(chsh -l | grep zsh | tail -n 1)
+		sudo pacman -S --needed git base-devel
+		git clone https://aur.archlinux.org/yay.git
+		cd yay
+		makepkg -si
+		;;
+	*)
+		echo "Your shell could not be changed. Proceeding."
+esac
+echo "Done!"
